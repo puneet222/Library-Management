@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { Books } from "../books/Books";
 import { Loader } from "../loader/Loader";
@@ -59,6 +60,15 @@ const Library = ({
       </button>
     </div>
   );
+};
+
+Library.propTypes = {
+  books: PropTypes.array,
+  isLoading: PropTypes.bool,
+  filteredBooks: PropTypes.array,
+  getAllBooks: PropTypes.func.isRequired,
+  searchBooks: PropTypes.func.isRequired,
+  setLoading: PropTypes.func.isRequired
 };
 
 const mapStateToParams = state => ({

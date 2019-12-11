@@ -1,17 +1,18 @@
 import React from "react";
-import { useHistory, withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteBook } from "../../actions/libraryActions";
 
-const SelectBook = withRouter(({ currentBook, history, deleteBook }) => {
-  let routerHistory = useHistory();
+const SelectBook = ({ currentBook, deleteBook }) => {
+  let history = useHistory();
   if (Object.keys(currentBook).length === 0) {
-    routerHistory.push("/");
+    history.push("/");
   }
 
   const handleDelete = () => {
     deleteBook(currentBook);
-    routerHistory.push("/");
+    history.push("/");
   };
 
   const handleUpdate = () => {
@@ -41,7 +42,12 @@ const SelectBook = withRouter(({ currentBook, history, deleteBook }) => {
       </div>
     </div>
   );
-});
+};
+
+SelectBook.propTypes = {
+  currentBook: PropTypes.object.isRequired,
+  deleteBook: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   currentBook: state.library.currentBook

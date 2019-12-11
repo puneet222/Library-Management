@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   createBook,
   updateBook,
@@ -119,6 +120,13 @@ const CreateBook = ({ isLoading, createBook, updateBook, setLoading }) => {
       </div>
     </div>
   );
+};
+
+CreateBook.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  createBook: PropTypes.func.isRequired,
+  updateBook: PropTypes.func.isRequired,
+  setLoading: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
