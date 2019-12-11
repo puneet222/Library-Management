@@ -1,9 +1,9 @@
 export const GET_ALL_BOOKS = "GET_ALL_BOOKS";
-export const GET_ALL_BOOKS_ERROR = "GET_ALL_BOOKS_ERROR"; 
+export const GET_ALL_BOOKS_ERROR = "GET_ALL_BOOKS_ERROR";
 export const SELECT_BOOK = "SELECT_BOOK";
 export const ADD_BOOK = "ADD_BOOK";
 export const ADD_BOOK_ERROR = "ADD_BOOK_ERROR";
 export const DELETE_BOOK = "DELETE_BOOK";
-export const DELETE_BOOK_ERROR = "DELETE_BOOK_ERROR"; 
+export const DELETE_BOOK_ERROR = "DELETE_BOOK_ERROR";
 export const UPDATE_BOOK = "UPDATE_BOOK";
 export const UPDATE_BOOK_ERROR = "UPDATE_BOOK_ERROR";
