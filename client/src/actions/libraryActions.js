@@ -7,7 +7,9 @@ import {
   DELETE_BOOK,
   DELETE_BOOK_ERROR,
   UPDATE_BOOK_ERROR,
-  UPDATE_BOOK
+  UPDATE_BOOK,
+  SEARCH_BOOKS,
+  SET_LOADING
 } from "./types";
 import { BOOKS_API } from "./apis";
 import axios from "axios";
@@ -15,7 +17,6 @@ import axios from "axios";
 // get all planets
 export const getAllBooks = () => async dispatch => {
   try {
-    //   setLoading();
     const res = await axios.get(BOOKS_API);
     dispatch({
       type: GET_ALL_BOOKS,
@@ -69,7 +70,7 @@ export const updateBook = book => async dispatch => {
 
 export const deleteBook = book => async dispatch => {
   try {
-    const res = await axios.delete(BOOKS_API + "/" + book._id);
+    await axios.delete(BOOKS_API + "/" + book._id);
     dispatch({
       type: DELETE_BOOK,
       payload: book
@@ -80,4 +81,18 @@ export const deleteBook = book => async dispatch => {
       payload: err
     });
   }
+};
+
+export const searchBooks = query => {
+  return {
+    type: SEARCH_BOOKS,
+    payload: query
+  };
+};
+
+export const setLoading = loading => {
+  return {
+    type: SET_LOADING,
+    payload: loading
+  };
 };

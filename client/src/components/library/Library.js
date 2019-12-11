@@ -2,17 +2,31 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Books } from "../books/Books";
-import { getAllBooks } from "../../actions/libraryActions";
+import { Loader } from "../loader/Loader";
+import {
+  getAllBooks,
+  searchBooks,
+  setLoading
+} from "../../actions/libraryActions";
 import "./library.css";
 
-const Library = ({ books, getAllBooks }) => {
+const Library = ({
+  books,
+  isLoading,
+  filteredBooks,
+  getAllBooks,
+  searchBooks,
+  setLoading
+}) => {
   useEffect(() => {
+    setLoading(true);
     getAllBooks();
-  }, []);
+  }, [getAllBooks]);
 
   let history = useHistory();
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [isFilter, setIsFilter] = useState(false);
 
   const handleAddBook = () => {
     history.push("/createOrUpdate");
@@ -20,6 +34,8 @@ const Library = ({ books, getAllBooks }) => {
 
   const handleSearchChange = e => {
     setSearchQuery(e.target.value);
+    setIsFilter(true);
+    searchBooks(e.target.value);
   };
 
   return (
@@ -31,7 +47,13 @@ const Library = ({ books, getAllBooks }) => {
         value={searchQuery}
         onChange={handleSearchChange}
       ></input>
-      <Books books={books} />
+      {!isLoading && isFilter ? (
+        <Books books={filteredBooks} />
+      ) : !isLoading ? (
+        <Books books={books} />
+      ) : (
+        <Loader />
+      )}
       <button className="add-button" onClick={handleAddBook}>
         Add Book
       </button>
@@ -40,7 +62,13 @@ const Library = ({ books, getAllBooks }) => {
 };
 
 const mapStateToParams = state => ({
-  books: state.library.books
+  books: state.library.books,
+  filteredBooks: state.library.filteredBooks,
+  isLoading: state.library.isLoading
 });
 
-export default connect(mapStateToParams, { getAllBooks })(Library);
+export default connect(mapStateToParams, {
+  getAllBooks,
+  searchBooks,
+  setLoading
+})(Library);

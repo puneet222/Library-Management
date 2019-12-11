@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import { createBook, updateBook } from "../../actions/libraryActions";
+import {
+  createBook,
+  updateBook,
+  setLoading
+} from "../../actions/libraryActions";
 import { connect } from "react-redux";
+import { Loader } from "../loader/Loader";
 
-const CreateBook = ({ createBook, updateBook }) => {
+const CreateBook = ({ isLoading, createBook, updateBook, setLoading }) => {
   let location = useLocation();
   let history = useHistory();
 
@@ -41,8 +46,9 @@ const CreateBook = ({ createBook, updateBook }) => {
       author,
       description
     };
+    setLoading(true);
     updateBook(bookObj);
-    history.push("/");
+    setTimeout(history.push("/"));
   };
 
   const handleAddBook = () => {
@@ -51,8 +57,9 @@ const CreateBook = ({ createBook, updateBook }) => {
       author,
       description
     };
+    setLoading(true);
     createBook(bookObj);
-    history.push("/");
+    setTimeout(() => history.push("/"));
   };
 
   return (
@@ -98,7 +105,7 @@ const CreateBook = ({ createBook, updateBook }) => {
           />
         </div>
         <div className="action">
-          {isEdit ? (
+          {!isLoading && isEdit ? (
             <button className="full-button blue-button" onClick={handleUpdate}>
               Update Book
             </button>
@@ -107,10 +114,17 @@ const CreateBook = ({ createBook, updateBook }) => {
               Add Book
             </button>
           )}
+          {isLoading ? <Loader /> : ""}
         </div>
       </div>
     </div>
   );
 };
 
-export default connect(null, { createBook, updateBook })(CreateBook);
+const mapStateToProps = state => ({
+  isLoading: state.library.isLoading
+});
+
+export default connect(mapStateToProps, { createBook, updateBook, setLoading })(
+  CreateBook
+);

@@ -7,3 +7,5 @@ export const DELETE_BOOK = "DELETE_BOOK";
 export const DELETE_BOOK_ERROR = "DELETE_BOOK_ERROR";
 export const UPDATE_BOOK = "UPDATE_BOOK";
 export const UPDATE_BOOK_ERROR = "UPDATE_BOOK_ERROR";
+export const SEARCH_BOOKS = "SEARCH_BOOKS";
+export const SET_LOADING = "SET_LOADING";

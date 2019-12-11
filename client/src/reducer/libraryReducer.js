@@ -3,13 +3,16 @@ import {
   SELECT_BOOK,
   ADD_BOOK,
   DELETE_BOOK,
-  UPDATE_BOOK
+  UPDATE_BOOK,
+  SEARCH_BOOKS,
+  SET_LOADING
 } from "../actions/types";
 
 const initialState = {
   books: [],
   filteredBooks: [],
-  currentBook: {}
+  currentBook: {},
+  isLoading: false
 };
 
 export default (state = initialState, action) => {
@@ -17,7 +20,9 @@ export default (state = initialState, action) => {
     case GET_ALL_BOOKS: {
       return {
         ...state,
-        books: action.payload
+        books: action.payload,
+        filteredBooks: action.payload,
+        isLoading: false
       };
     }
     case SELECT_BOOK: {
@@ -29,21 +34,38 @@ export default (state = initialState, action) => {
     case ADD_BOOK: {
       return {
         ...state,
-        books: [...state.books, action.payload]
+        books: [...state.books, action.payload],
+        isLoading: false
       };
     }
     case DELETE_BOOK: {
       return {
         ...state,
-        books: state.books.filter(book => book._id !== action.payload._id)
+        books: state.books.filter(book => book._id !== action.payload._id),
+        isLoading: false
       };
     }
     case UPDATE_BOOK: {
       return {
         ...state,
         books: state.books.map(book =>
-          book._id === action.payload._id ? action.payload : book
+          book._id === action.payload.book._id ? action.payload.book : book
+        ),
+        isLoading: false
+      };
+    }
+    case SEARCH_BOOKS: {
+      return {
+        ...state,
+        filteredBooks: state.books.filter(book =>
+          book.name.toLowerCase().includes(action.payload.toLowerCase())
         )
+      };
+    }
+    case SET_LOADING: {
+      return {
+        ...state,
+        isLoading: action.payload
       };
     }
     default:
