@@ -67,12 +67,12 @@ export const updateBook = book => async dispatch => {
   }
 };
 
-export const deleteBook = bookId => async dispatch => {
+export const deleteBook = book => async dispatch => {
   try {
-    const res = await axios.delete(BOOKS_API + "/" + bookId);
+    const res = await axios.delete(BOOKS_API + "/" + book._id);
     dispatch({
       type: DELETE_BOOK,
-      payload: res.data
+      payload: book
     });
   } catch (err) {
     dispatch({

@@ -1,0 +1,55 @@
+.library-home {
+  text-align: center;
+}
+
+.add-button {
+  background-color: #ffc107;
+  border: none;
+  color: black;
+  padding: 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 4%;
+  position: absolute;
+  bottom: 1%;
+  right: 1%;
+  cursor: pointer;
+}
+
+.nav {
+  background: #000;
+  height: 60px;
+  text-align: center;
+}
+
+.nav ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5em;
+}
+
+.nav li {
+  display: inline-block;
+  list-style: none;
+  height: 60px;
+  line-height: 60px;
+}
+
+.search-bar {
+  margin: 0 auto;
+  width: 60%;
+  height: 45px;
+  padding: 0 20px;
+  font-size: 1rem;
+  border: 1px solid #d0cfce;
+  outline: none;
+  margin-top: 2%;
+}
